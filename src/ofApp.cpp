@@ -1,4 +1,4 @@
- 
+
 /*
  
  Copyright 2007, 2008 Damian Stewart damian@frey.co.nz
@@ -52,55 +52,61 @@ void ofApp::keyPressed  (int key){
 	{
 		ofxOscMessage m;
 		m.setAddress( "mood" );
-		m.addIntArg( 0 );
+		m.addInt64Arg( 0 );
 		sender.sendMessage( m );
 	}else if( key =='s' || key == 'S' )
         {
                 ofxOscMessage m;
                 m.setAddress( "mood" );
-                m.addIntArg( 1 );
+                m.addInt64Arg( 1 );
                 sender.sendMessage( m );
         }else if( key =='d' || key == 'D' )
         {
                 ofxOscMessage m;
                 m.setAddress( "mood" );
-                m.addIntArg( 2 );
+                m.addInt64Arg( 2 );
                 sender.sendMessage( m );
         }else if( key =='f' || key == 'F' )
         {
                 ofxOscMessage m;
                 m.setAddress( "mood" );
-                m.addIntArg( 3 );
+                m.addInt64Arg( 3 );
                 sender.sendMessage( m );
         }else if( key =='q' || key == 'Q' )
         {
                 ofxOscMessage m;
                 m.setAddress( "mood" );
-                m.addIntArg( 4 );
+                m.addInt64Arg( 4 );
                 sender.sendMessage( m );
         }else if( key =='w' || key == 'W' )
         {
                 ofxOscMessage m;
                 m.setAddress( "mood" );
-                m.addIntArg( 5 );
+                m.addInt64Arg( 5 );
                 sender.sendMessage( m );
         }else if( key =='e' || key == 'E' )
         {
                 ofxOscMessage m;
                 m.setAddress( "mood" );
-                m.addIntArg( 6 );
+                m.addInt64Arg( 6 );
                 sender.sendMessage( m );
         }else if( key =='r' || key == 'R' )
         {
                 ofxOscMessage m;
                 m.setAddress( "mood" );
-                m.addIntArg( 7 );
+                m.addInt64Arg( 7 );
                 sender.sendMessage( m );
         }else if( key =='T' || key == 't' )
         {
                 ofxOscMessage m;
                 m.setAddress( "mood" );
-                m.addIntArg( 8 );
+                m.addInt64Arg( 8 );
+                sender.sendMessage( m );
+        }else if( key =='Y' || key == 'y' )
+        {
+                ofxOscMessage m;
+                m.setAddress( "mood" );
+                m.addInt64Arg( 9 );
                 sender.sendMessage( m );
         }
 		
@@ -108,11 +114,18 @@ void ofApp::keyPressed  (int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-	ofxOscMessage m;
-	m.setAddress( "/mouse/position" );
-	m.addIntArg( x );
-	m.addIntArg( y );
-	sender.sendMessage( m );
+        if(x < 256){
+            ofxOscMessage m;	
+	    m.setAddress( "slider1" );
+            m.addInt64Arg( x );
+	    sender.sendMessage( m );
+	}
+	if(y < 256){
+            ofxOscMessage m;
+            m.setAddress( "slider2" );
+            m.addInt64Arg( y );
+            sender.sendMessage( m );
+        }
 }
 
 //--------------------------------------------------------------
@@ -128,10 +141,3 @@ void ofApp::mousePressed(int x, int y, int button){
 	sender.sendMessage( m );
 }
 
-//--------------------------------------------------------------
-void ofApp::mouseReleased(){
-	ofxOscMessage m;
-	m.setAddress( "/mouse/button" );
-	m.addStringArg( "up" );
-	sender.sendMessage( m );	
-}
